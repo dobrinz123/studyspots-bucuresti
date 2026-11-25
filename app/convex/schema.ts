@@ -1,0 +1,48 @@
+import { defineSchema, defineTable } from "convex/server";
+import { v } from "convex/values";
+
+const ratings = v.object({
+  crowdedness: v.number(),
+  outlets: v.number(),
+  quietness: v.number(),
+  wifi: v.number(),
+  safety: v.number(),
+});
+
+export default defineSchema({
+  users: defineTable({
+    name: v.string(),
+    email: v.string(),
+    role: v.union(v.literal("student"), v.literal("admin")),
+  }).index("by_email", ["email"]),
+
+  places: defineTable({
+    name: v.string(),
+    type: v.union(v.literal("library"), v.literal("cafe"), v.literal("coworking")),
+    address: v.string(),
+    lat: v.number(),
+    lng: v.number(),
+    description: v.string(),
+    openingHours: v.string(),
+    avgRatings: ratings,
+    reviewCount: v.number(),
+  }).index("by_type", ["type"]),
+
+  reviews: defineTable({
+    placeId: v.id("places"),
+    userId: v.id("users"),
+    ratings,
+    comment: v.string(),
+    createdAt: v.number(),
+  })
+    .index("by_place", ["placeId"])
+    .index("by_user", ["userId"]),
+
+  favorites: defineTable({
+    userId: v.id("users"),
+    placeId: v.id("places"),
+    createdAt: v.number(),
+  })
+    .index("by_user", ["userId"])
+    .index("by_user_place", ["userId", "placeId"]),
+});

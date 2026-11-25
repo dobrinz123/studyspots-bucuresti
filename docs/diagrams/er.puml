@@ -1,0 +1,54 @@
+@startuml
+title StudySpots - Diagrama bazei de date (Convex)
+hide circle
+skinparam linetype ortho
+
+entity users {
+  * _id : Id<users>
+  --
+  name : string
+  email : string
+  role : "student" | "admin"
+}
+
+entity places {
+  * _id : Id<places>
+  --
+  name : string
+  type : "library" | "cafe" | "coworking"
+  address : string
+  lat : number
+  lng : number
+  description : string
+  openingHours : string
+  avgRatings : object (5 medii)
+  reviewCount : number
+}
+
+entity reviews {
+  * _id : Id<reviews>
+  --
+  placeId : Id<places>
+  userId : Id<users>
+  crowdedness : 1..5
+  outlets : 1..5
+  quietness : 1..5
+  wifi : 1..5
+  safety : 1..5
+  comment : string
+  createdAt : number
+}
+
+entity favorites {
+  * _id : Id<favorites>
+  --
+  userId : Id<users>
+  placeId : Id<places>
+  createdAt : number
+}
+
+users ||--o{ reviews
+places ||--o{ reviews
+users ||--o{ favorites
+places ||--o{ favorites
+@enduml

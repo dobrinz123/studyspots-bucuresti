@@ -1,0 +1,31 @@
+@startuml
+title Adaugarea unei recenzii
+|Student|
+start
+:Selecteaza un loc pe harta;
+|Sistem|
+:Afiseaza detaliile locului;
+|Student|
+:Apasa "Adauga recenzie";
+|Sistem|
+if (Utilizator autentificat?) then (Da)
+  |Student|
+  :Completeaza ratingurile (aglomeratie, prize,\nliniste, Wi-Fi, siguranta) si comentariul;
+  :Trimite recenzia;
+  |Sistem|
+  :Valideaza datele (rating 1-5 pentru fiecare criteriu);
+  if (Date valide?) then (Da)
+    :Salveaza recenzia in Convex;
+    :Recalculeaza mediile locului;
+    :Actualizeaza harta si popup-ul (timp real);
+    |Student|
+    :Vede recenzia si noile medii;
+  else (Nu)
+    |Sistem|
+    :Afiseaza mesaj de eroare\n(campuri lipsa / valori invalide);
+  endif
+else (Nu)
+  :Redirectioneaza la autentificare;
+endif
+stop
+@enduml

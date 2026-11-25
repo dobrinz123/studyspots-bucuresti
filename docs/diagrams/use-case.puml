@@ -1,0 +1,39 @@
+@startuml
+title StudySpots - Cazuri de utilizare
+left to right direction
+actor "Student" as S
+actor "Administrator" as A
+A --|> S
+
+rectangle "StudySpots" {
+  usecase "Autentificare" as UC0
+  usecase "Vizualizare locuri pe harta" as UC1
+  usecase "Consultare detalii loc" as UC2
+  usecase "Adaugare recenzie\n(rating pe criterii)" as UC3
+  usecase "Filtrare dupa criterii" as UC4
+  usecase "Gasire cel mai apropiat loc" as UC5
+  usecase "Gestionare favorite" as UC6
+  usecase "Vizualizare dashboard statistici" as UC7
+  usecase "Adaugare loc pe harta" as UC8
+  usecase "Editare loc" as UC9
+  usecase "Stergere loc" as UC10
+}
+
+S --> UC1
+S --> UC2
+S --> UC3
+S --> UC4
+S --> UC5
+S --> UC6
+S --> UC7
+A --> UC8
+A --> UC9
+A --> UC10
+
+UC3 .> UC0 : <<include>>
+UC6 .> UC0 : <<include>>
+UC8 .> UC0 : <<include>>
+UC9 .> UC0 : <<include>>
+UC10 .> UC0 : <<include>>
+UC4 .> UC1 : <<extend>>
+@enduml
