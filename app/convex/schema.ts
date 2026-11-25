@@ -35,7 +35,8 @@ export default defineSchema({
     createdAt: v.number(),
   })
     .index("by_place", ["placeId"])
-    .index("by_user", ["userId"]),
+    .index("by_user", ["userId"])
+    .index("by_place_and_user", ["placeId", "userId"]),
 
   favorites: defineTable({
     userId: v.id("users"),
@@ -43,5 +44,6 @@ export default defineSchema({
     createdAt: v.number(),
   })
     .index("by_user", ["userId"])
-    .index("by_user_place", ["userId", "placeId"]),
+    .index("by_place", ["placeId"])
+    .index("by_user_and_place", ["userId", "placeId"]),
 });

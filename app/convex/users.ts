@@ -26,6 +26,13 @@ export const me = query({
   },
 });
 
+// Utilizator autentificat obligatoriu; intoarce id-ul lui.
+export async function requireUser(ctx: QueryCtx) {
+  const userId = await getAuthUserId(ctx);
+  if (userId === null) throw new Error("Neautentificat");
+  return userId;
+}
+
 // Folosit de functiile de admin (ex. places.create/update/remove): arunca eroare daca nu e admin.
 export async function requireAdmin(ctx: QueryCtx) {
   const userId = await getAuthUserId(ctx);
