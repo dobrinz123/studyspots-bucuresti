@@ -8,7 +8,10 @@
  * @module
  */
 
+import type * as admin from "../admin.js";
+import type * as auth from "../auth.js";
 import type * as places from "../places.js";
+import type * as users from "../users.js";
 
 import type {
   ApiFromModules,
@@ -17,7 +20,10 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  admin: typeof admin;
+  auth: typeof auth;
   places: typeof places;
+  users: typeof users;
 }>;
 
 /**
@@ -46,4 +52,8 @@ export declare const internal: FilterApi<
   FunctionReference<any, "internal">
 >;
 
-export declare const components: {};
+export declare const components: {
+  auth: import("@convex-dev/auth/_generated/component.js").ComponentApi<"auth">;
+  authPasskey: import("@convex-dev/auth/components/passkey/_generated/component.js").ComponentApi<"authPasskey">;
+  authUsername: import("@convex-dev/auth/components/username/_generated/component.js").ComponentApi<"authUsername">;
+};

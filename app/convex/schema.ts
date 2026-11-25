@@ -10,11 +10,10 @@ const ratings = v.object({
 });
 
 export default defineSchema({
+  // username-ul si credentialele sunt gestionate de Convex Auth; aici doar campurile aplicatiei.
   users: defineTable({
-    name: v.string(),
-    email: v.string(),
-    role: v.union(v.literal("student"), v.literal("admin")),
-  }).index("by_email", ["email"]),
+    role: v.optional(v.union(v.literal("student"), v.literal("admin"))),
+  }),
 
   places: defineTable({
     name: v.string(),

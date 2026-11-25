@@ -16,7 +16,7 @@
 | Resursă | Link | Observații |
 |---------|------|------------|
 | Board Trello | https://trello.com/b/<board-id> | Toți membrii + cadrul didactic. Coloane: Backlog, To Do, In Progress, Review, Done |
-| Repository GitHub | https://github.com/<organizatie>/<repo> | Cu README, accesibil cadrului didactic |
+| Repository GitHub | https://github.com/dobrinz123/studyspots-bucuresti | Cu README, accesibil cadrului didactic |
 | Aplicația (demo final) | https://example.com | După publicare |
 
 ## 2. Tema generală și obiectivele propuse
@@ -56,7 +56,7 @@ BD **Convex** (document-relațională). Schema în `convex/schema.ts`; legături
 
 | Tabel | Câmpuri principale | Relații |
 |-------|--------------------|---------|
-| users | name, email, role (`student` / `admin`) | – |
+| users | role (`student` / `admin`); username și passkey în componentele Convex Auth | – |
 | places | name, type (`library` / `cafe` / `coworking`), address, lat, lng, description, openingHours, avgRatings (5 medii), reviewCount | – |
 | reviews | placeId, userId, crowdedness, outlets, quietness, wifi, safety (1–5), comment, createdAt | placeId → places, userId → users |
 | favorites | userId, placeId, createdAt | userId → users, placeId → places |
@@ -131,10 +131,10 @@ Sursă: `diagrams/activity.puml`
 |------|-------------------|-------------|-------|
 | T1 | Creare repo GitHub, board Trello, Space Docmost | | M0 |
 | T2 | Inițializare proiect Convex și frontend | | M1 |
-| T3 | Definire `schema.ts` (users, places, reviews, favorites) | | M1 |
+| T3 | Definire `schema.ts` (users, places, reviews, favorites) | David Dobrin | M1 |
 | T4 | Inițializare hartă ArcGIS centrată pe București | | M1 |
 | T5 | Script de seed cu ~30 locuri reale din București | | M1 |
-| T6 | Autentificare (Convex Auth) + roluri student/admin | | M2 |
+| T6 | Autentificare (Convex Auth) + roluri student/admin | David Dobrin | M2 |
 | T7 | Afișare locuri pe hartă cu simbol pe tip | | M2 |
 | T8 | Popup/panou detalii loc cu ratinguri medii | | M2 |
 | T9 | Formular recenzie + mutation `reviews.add` + recalculare medii | | M2 |

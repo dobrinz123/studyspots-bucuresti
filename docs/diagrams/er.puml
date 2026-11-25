@@ -6,8 +6,6 @@ skinparam linetype ortho
 entity users {
   * _id : Id<users>
   --
-  name : string
-  email : string
   role : "student" | "admin"
 }
 
