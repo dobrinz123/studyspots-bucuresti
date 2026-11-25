@@ -10,7 +10,10 @@
 
 import type * as admin from "../admin.js";
 import type * as auth from "../auth.js";
+import type * as favorites from "../favorites.js";
 import type * as places from "../places.js";
+import type * as reviews from "../reviews.js";
+import type * as stats from "../stats.js";
 import type * as users from "../users.js";
 
 import type {
@@ -22,7 +25,10 @@ import type {
 declare const fullApi: ApiFromModules<{
   admin: typeof admin;
   auth: typeof auth;
+  favorites: typeof favorites;
   places: typeof places;
+  reviews: typeof reviews;
+  stats: typeof stats;
   users: typeof users;
 }>;
 

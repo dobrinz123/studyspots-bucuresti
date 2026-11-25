@@ -48,7 +48,7 @@ Responsabil: David Dobrin (task-urile B1–B12).
 | placeId | Id<places> | cheie străină |
 | createdAt | number | |
 
-Index `by_user_place (userId, placeId)` este folosit pentru unicitate: la „adaugă la favorite" se verifică întâi dacă perechea există.
+Index `by_user_and_place (userId, placeId)` este folosit pentru unicitate: la „adaugă la favorite" se verifică întâi dacă perechea există.
 
 ### Relații
 - users 1 — N reviews; places 1 — N reviews
@@ -82,17 +82,17 @@ Sursă: `docs/diagrams/er.puml` (se randează în `docs/diagrams/out/er.svg`).
 | `users:me` | query | autentificat | – | `{ _id, username, role }` sau `null` | implementat |
 | `auth:*` (signIn/signUp/signOut) | mutation/action | public | username, passkey | sesiune | implementat |
 | `places:list` | query | public | – | lista locurilor | implementat |
-| `places:listGeoJson` | query | public | – | GeoJSON FeatureCollection | de făcut |
-| `places:create` | mutation | admin | name, type, address, lat, lng, description, openingHours | id | de făcut |
-| `places:update` | mutation | admin | placeId + câmpuri de schimbat | – | de făcut |
-| `places:remove` | mutation | admin | placeId | – | de făcut |
-| `places:filter` | query | public | type?, minRatings? `{ crowdedness?, outlets?, quietness?, wifi?, safety? }` | lista locurilor | de făcut |
-| `places:nearest` | query | public | lat, lng | `{ place, km }` (Haversine) | implementat (varianta de bază) |
-| `reviews:add` | mutation | autentificat | placeId, ratings (5×1–5), comment | id | de făcut |
-| `reviews:byPlace` | query | public | placeId | lista recenziilor | de făcut |
-| `favorites:toggle` | mutation | autentificat | placeId | `{ favorite: boolean }` | de făcut |
-| `favorites:mine` | query | autentificat | – | locurile favorite | de făcut |
-| `stats:dashboard` | query | public | – | nr. recenzii, medii pe criterii, top locuri | de făcut |
+| `places:listGeoJson` | query | public | – | GeoJSON FeatureCollection | implementat |
+| `places:create` | mutation | admin | name, type, address, lat, lng, description, openingHours | id | implementat |
+| `places:update` | mutation | admin | placeId + câmpuri de schimbat | – | implementat |
+| `places:remove` | mutation | admin | placeId | – | implementat |
+| `places:filter` | query | public | type?, minRatings? `{ crowdedness?, outlets?, quietness?, wifi?, safety? }` | lista locurilor | implementat |
+| `places:nearest` | query | public | lat, lng, limit?, type? | lista `{ place, km }` sortată (Haversine) | implementat |
+| `reviews:add` | mutation | autentificat | placeId, ratings (5×1–5), comment | id | implementat |
+| `reviews:byPlace` | query | public | placeId | lista recenziilor | implementat |
+| `favorites:toggle` | mutation | autentificat | placeId | `{ favorite: boolean }` | implementat |
+| `favorites:mine` | query | autentificat | – | locurile favorite | implementat |
+| `stats:dashboard` | query | public | – | nr. recenzii, medii pe criterii, top locuri | implementat |
 | `places:seed` | mutation | dezvoltare | – | încarcă date inițiale | implementat (3 locuri de test) |
 
 ### Coduri de eroare
