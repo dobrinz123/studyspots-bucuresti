@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 import Map from "@arcgis/core/Map";
 import ArcView from "@arcgis/core/views/MapView";
@@ -11,21 +11,25 @@ const colors: Record<string, string> = { library: "#2563eb", cafe: "#b45309", co
 
 export default function MapView({ places }: { places: Place[] }) {
   const div = useRef<HTMLDivElement>(null);
-  const layer = useRef(new GraphicsLayer());
+  const [layer, setLayer] = useState<GraphicsLayer | null>(null);
 
   useEffect(() => {
+    // layer-ul se creeaza o data cu view-ul: view.destroy() distruge si layer-ele hartii
+    const placesLayer = new GraphicsLayer();
     const view = new ArcView({
       container: div.current!,
-      map: new Map({ basemap: "osm", layers: [layer.current] }),
+      map: new Map({ basemap: "osm", layers: [placesLayer] }),
       center: [26.1025, 44.4268], // Bucuresti
       zoom: 12,
     });
+    setLayer(placesLayer);
     return () => view.destroy();
   }, []);
 
   useEffect(() => {
-    layer.current.removeAll();
-    layer.current.addMany(
+    if (!layer) return;
+    layer.removeAll();
+    layer.addMany(
       places.map(
         (p) =>
           new Graphic({
@@ -36,7 +40,7 @@ export default function MapView({ places }: { places: Place[] }) {
           }),
       ),
     );
-  }, [places]);
+  }, [layer, places]);
 
   return <div ref={div} style={{ width: "100%", height: "100%" }} />;
 }
