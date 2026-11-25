@@ -1,0 +1,49 @@
+/* Elementele puse peste harta (legenda, panouri). */
+
+.map-area {
+  position: relative;
+  height: 100%;
+  flex: 1;
+  min-width: 0;
+}
+
+.panel {
+  background: #fff;
+  color: #111;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.legend {
+  position: absolute;
+  left: 12px;
+  bottom: 28px;
+  z-index: 10;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 2px 0;
+}
+
+.legend-symbol {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 0 1px #9ca3af;
+}
+
+.legend-circle {
+  border-radius: 50%;
+}
+
+.legend-diamond {
+  transform: rotate(45deg) scale(0.85);
+}

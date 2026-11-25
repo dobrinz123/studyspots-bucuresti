@@ -4,10 +4,9 @@ import Map from "@arcgis/core/Map";
 import ArcView from "@arcgis/core/views/MapView";
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 import Graphic from "@arcgis/core/Graphic";
+import { placeTypes, type PlaceType } from "./placeMeta";
 
-export type Place = { _id: string; name: string; type: string; address: string; lat: number; lng: number };
-
-const colors: Record<string, string> = { library: "#2563eb", cafe: "#b45309", coworking: "#059669" };
+export type Place = { _id: string; name: string; type: PlaceType; address: string; lat: number; lng: number };
 
 export default function MapView({ places }: { places: Place[] }) {
   const div = useRef<HTMLDivElement>(null);
@@ -34,7 +33,13 @@ export default function MapView({ places }: { places: Place[] }) {
         (p) =>
           new Graphic({
             geometry: { type: "point", longitude: p.lng, latitude: p.lat },
-            symbol: { type: "simple-marker", color: colors[p.type] ?? "#555", size: 12 },
+            symbol: {
+              type: "simple-marker",
+              style: placeTypes[p.type].marker,
+              color: placeTypes[p.type].color,
+              size: 14,
+              outline: { color: "white", width: 1.5 },
+            },
             attributes: p,
             popupTemplate: { title: "{name}", content: "{address}" },
           }),
